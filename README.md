@@ -20,7 +20,7 @@ For the AI to work, it uses a powerful model via Groq. You'll need to generate a
 This uses Python to talk to the AI model.
 
 1. Open your terminal/command prompt and navigate into the backend directory:
-   `ash
+   `
    cd backend
    `
 2. **Create a virtual environment** (this keeps the Python tools separate from your main system):
@@ -30,7 +30,7 @@ This uses Python to talk to the AI model.
    * On Windows: .\venv\Scripts\activate
    * On Mac/Linux: source venv/bin/activate
 4. **Install the dependencies**:
-   `ash
+   `
    pip install -r requirements.txt
    `
 5. **Set up the Environment Variable**:
@@ -40,7 +40,7 @@ This uses Python to talk to the AI model.
      GROQ_API_KEY=gsk_abc123...
      `
 6. **Start the backend server**:
-   `ash
+   `
    python -m uvicorn main:app --reload
    `
    *(Leave this window open so the brain stays awake! It runs on http://127.0.0.1:8000)*
@@ -52,15 +52,15 @@ This uses Python to talk to the AI model.
 Open a **new** terminal window for this part.
 
 1. Navigate to the frontend directory:
-   `ash
+   `
    cd frontend
    `
 2. **Install the Node.js packages** (make sure you have Node installed on your computer):
-   `ash
+   `
    npm install
    `
 3. **Start the development server**:
-   `ash
+   `
    npm run dev
    `
    *(This starts the website locally. Leave this window running too!)*
