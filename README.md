@@ -1,4 +1,4 @@
-# LifeMaxxer AI - Project Setup Guide
+﻿# LifeMaxxer AI - Project Setup Guide
 
 Welcome! This repository acts as your personal "Life Audit" app powered by AI. It consists of a **Next.js Frontend** (what you see in the browser) and a **FastAPI Backend** (what handles the Groq AI magic).
 
@@ -11,7 +11,7 @@ For the AI to work, it uses a powerful model via Groq. You'll need to generate a
 1. Go to [console.groq.com](https://console.groq.com/).
 2. Create an account or sign in.
 3. Click on **API Keys** in the sidebar.
-4. Click **Create API Key**. Give it a name (like "Life Audit App") and copy the key it gives you immediately. Save this key somewhere safe�you'll need it in the Backend step!
+4. Click **Create API Key**. Give it a name (like "Life Audit App") and copy the key it gives you immediately. Save this key somewhere safe—you'll need it in the Backend step!
 
 ---
 
