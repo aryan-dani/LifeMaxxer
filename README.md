@@ -34,9 +34,9 @@ This uses Python to talk to the AI model.
    pip install -r requirements.txt
    `
 5. **Set up the Environment Variable**:
-   * Create a file simply named .env inside the ackend folder (if it doesn't already exist).
+   * Create a file simply named .env inside the backend folder (if it doesn't already exist).
    * Inside it, paste your Groq key like this (replace your_api_key_here with your actual key!):
-     `env
+     `
      GROQ_API_KEY=gsk_abc123...
      `
 6. **Start the backend server**:
