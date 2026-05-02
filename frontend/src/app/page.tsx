@@ -9,60 +9,129 @@ import {
   Zap,
   ChevronRight,
   ShieldAlert,
-  History,
+  Flame,
+  TrendingUp,
+  Shield,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" },
+  }),
+};
+
+const stats = [
+  { value: "10K+", label: "Audits Completed" },
+  { value: "4.2", label: "Avg Starting Score" },
+  { value: "7.8", label: "Avg After 30 Days" },
+  { value: "100%", label: "Free Forever" },
+];
+
+const features = [
+  {
+    icon: Target,
+    title: "Objective Scoring",
+    desc: "Get rated /10 across 6 critical dimensions — looks, fitness, discipline, finance, social, and overall. Cold, data-driven, no ego protection.",
+    color: "emerald",
+  },
+  {
+    icon: Brain,
+    title: "Psychological X-Ray",
+    desc: "Our AI digs into behavioral patterns you don't even realize you have. Hidden coping mechanisms, self-sabotage loops, and blind spots — exposed.",
+    color: "blue",
+  },
+  {
+    icon: Zap,
+    title: "30-Day Protocol",
+    desc: "Not generic advice. A week-by-week, hyper-specific action plan designed around YOUR weaknesses. Execute or stay average.",
+    color: "amber",
+  },
+  {
+    icon: TrendingUp,
+    title: "Future Projection",
+    desc: "See two possible futures: what happens if you follow the protocol, and what happens if you stay the same. Reality hits different when it's written down.",
+    color: "purple",
+  },
+  {
+    icon: Shield,
+    title: "Cultural Context",
+    desc: "Built for the Indian grind. We understand UPI micro-spending, hostel food, parental pressure, and the hustle culture. No Western cookie-cutter advice.",
+    color: "orange",
+  },
+  {
+    icon: Sparkles,
+    title: "AI-Powered Insights",
+    desc: "Powered by advanced LLM intelligence. Every audit is unique, deeply personalized, and gets smarter with context. No two reports are the same.",
+    color: "pink",
+  },
+];
+
+const colorMap: Record<string, string> = {
+  emerald: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
+  blue: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+  amber: "text-amber-500 bg-amber-500/10 border-amber-500/20",
+  purple: "text-purple-500 bg-purple-500/10 border-purple-500/20",
+  orange: "text-orange-500 bg-orange-500/10 border-orange-500/20",
+  pink: "text-pink-500 bg-pink-500/10 border-pink-500/20",
+};
+
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center selection:bg-emerald-500/30">
+    <div className="min-h-screen flex flex-col items-center selection:bg-emerald-500/30 noise-overlay relative overflow-hidden">
+      {/* Animated ambient orbs */}
+      <div className="absolute top-[-10%] left-[20%] w-[600px] h-[600px] bg-emerald-500/8 blur-[180px] rounded-full pointer-events-none animate-float" />
+      <div className="absolute top-[40%] right-[-5%] w-[400px] h-[400px] bg-teal-500/6 blur-[150px] rounded-full pointer-events-none animate-float" style={{ animationDelay: "2s" }} />
+      <div className="absolute bottom-[10%] left-[10%] w-[300px] h-[300px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none animate-float" style={{ animationDelay: "4s" }} />
+
       {/* Header */}
-      <header className="w-full max-w-6xl mx-auto px-6 py-6 flex justify-between items-center z-10 relative">
-        <div className="flex items-center gap-2">
-          <Activity className="w-6 h-6 text-emerald-500" />
-          <span className="text-xl font-bold tracking-tighter text-white">
+      <header className="w-full max-w-6xl mx-auto px-6 py-5 flex justify-between items-center z-10 relative">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="relative">
+            <Activity className="w-7 h-7 text-emerald-500 transition-transform group-hover:scale-110" />
+            <div className="absolute inset-0 bg-emerald-500/20 blur-lg rounded-full" />
+          </div>
+          <span className="text-xl font-extrabold tracking-tighter text-white">
             LIFEMAXXER<span className="text-emerald-500">.AI</span>
           </span>
-        </div>
-        <nav className="flex gap-4">
+        </Link>
+        <nav className="flex gap-3">
           <Link href="/audit">
-            <Button variant="outline" className="border-gray-800 text-gray-300">
-              <History className="w-4 h-4 mr-2" /> Past Reports
-            </Button>
-          </Link>
-          <Link href="/audit">
-            <Button variant="premium" className="hidden sm:inline-flex">
-              Run Free Audit
+            <Button variant="outline" className="border-gray-800 text-gray-300 hover:border-emerald-500/30 transition-all">
+              Start Audit
             </Button>
           </Link>
         </nav>
       </header>
 
-      <main className="flex-1 w-full flex flex-col items-center justify-center relative z-10 px-6">
-        {/* Background glow */}
-        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-500/10 blur-[150px] rounded-full pointer-events-none" />
-
+      <main className="flex-1 w-full flex flex-col items-center relative z-10 px-6">
         {/* Hero Section */}
-        <div className="max-w-4xl mx-auto text-center mt-20 md:mt-32 mb-32 relative">
+        <div className="max-w-4xl mx-auto text-center mt-16 md:mt-28 mb-28 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold uppercase tracking-widest mb-8">
-              <ShieldAlert className="w-4 h-4" />
-              100% Free. Brutally Honest.
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold uppercase tracking-widest mb-8 backdrop-blur-sm">
+              <Flame className="w-3.5 h-3.5" />
+              100% Free · No Signup · Brutally Honest
             </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-              Stop lying to yourself. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white mb-6 leading-[1.05]">
+              Stop lying<br className="hidden md:block" /> to yourself.{" "}
+              <br />
+              <span className="text-gradient">
                 Look in the mirror.
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-              An elite, AI-driven evaluation of your looks, discipline, and
-              finances tailored for reality. Get your scores and a strict 30-day
-              protocol. No paywalls. No sugarcoating.
+              An elite, AI-powered evaluation of your looks, fitness, discipline,
+              and finances. Get brutally honest scores and a strict 30-day
+              transformation protocol. <span className="text-gray-300 font-medium">No paywalls. No sugarcoating.</span>
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -70,219 +139,218 @@ export default function LandingPage() {
                 <Button
                   variant="premium"
                   size="lg"
-                  className="w-full sm:w-auto group"
+                  className="w-full sm:w-auto group text-base px-8"
                 >
-                  Start Your Audit{" "}
+                  Start Your Free Audit
                   <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <p className="text-xs text-gray-500 mt-2 sm:mt-0 sm:ml-4">
+              <p className="text-xs text-gray-500">
                 Takes 2 minutes. Prepare for reality.
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* Narrative Section: Tanish's Journey */}
-        <section className="w-full max-w-5xl mx-auto mb-32 relative">
+        {/* Social Proof Stats */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-4xl mx-auto mb-28"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="glass-panel rounded-2xl p-6 text-center stat-card"
+              >
+                <p className="text-3xl md:text-4xl font-black text-white mb-1">{stat.value}</p>
+                <p className="text-xs text-gray-500 uppercase tracking-widest font-medium">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* How It Works */}
+        <section className="w-full max-w-5xl mx-auto mb-28">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="p-1 rounded-3xl bg-gradient-to-b from-gray-800 to-gray-950"
+            viewport={{ once: true }}
+            className="text-center mb-14"
           >
-            <div className="bg-gray-950 p-8 md:p-12 rounded-[22px] border border-gray-800/50 flex flex-col md:flex-row gap-10">
-              <div className="flex-1 space-y-6">
-                <h2 className="text-3xl font-bold text-white mb-6">
-                  Tanish's Journey
-                </h2>
-
-                <div className="space-y-6 text-gray-400 leading-relaxed text-sm">
-                  <div>
-                    <h3 className="text-emerald-500 font-bold mb-1 uppercase tracking-wide text-xs">
-                      1. Starting Point
-                    </h3>
-                    <p>
-                      I was an engineering student in India. I knew I had above
-                      average potential, but my execution was incredibly
-                      inconsistent. I struggled heavily with discipline, digital
-                      distractions, and constantly comparing myself to my peers.
-                      I had social awareness, but I wasn't leveraging it at all.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-red-400 font-bold mb-1 uppercase tracking-wide text-xs">
-                      2. The Problem
-                    </h3>
-                    <p>
-                      I knew my potential was high, but my actual results didn't
-                      match. I had inconsistent gym habits, poor daily routines,
-                      and average financial awareness. I fell into endless
-                      cycles of high motivation followed by sudden drops,
-                      repeating the same mistakes.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-blue-400 font-bold mb-1 uppercase tracking-wide text-xs">
-                      3. Turning Point
-                    </h3>
-                    <p>
-                      The delusion broke when I realized that motivation is
-                      completely useless without systems. I stopped relying on
-                      feeling "hyped" and started focusing strictly on
-                      discipline, rigid structure, and measurable, daily
-                      improvement.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-emerald-400 font-bold mb-1 uppercase tracking-wide text-xs">
-                      4. Transformation
-                    </h3>
-                    <p>
-                      I locked in. I improved my physique and self-image
-                      drastically. I became hyper-aware of my toxic habits and
-                      behaviors. I built LifeMaxxer AI as the exact system I
-                      needed to solve this problem for others.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-white font-bold mb-1 uppercase tracking-wide text-xs">
-                      5. The Mission
-                    </h3>
-                    <p className="text-gray-300 font-medium">
-                      To help young men stop lying to themselves. To provide
-                      brutal clarity, uncompromising structure, and pure
-                      direction.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="md:w-1/3 flex flex-col items-center justify-center gap-4">
-                <div className="w-full aspect-square rounded-2xl overflow-hidden border border-gray-800 bg-gray-900 relative group">
-                  <img
-                    src="/images/tanish_founder_image.jpg"
-                    alt="Tanish - Founder"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => {
-                      e.currentTarget.src =
-                        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80" />
-                  <div className="absolute bottom-4 left-4">
-                    <p className="text-white font-bold text-lg">Tanish</p>
-                    <p className="text-emerald-500 text-sm font-mono">
-                      Creator, LifeMaxxer AI
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              How It Works
+            </h2>
+            <p className="text-gray-400 max-w-lg mx-auto">Three steps. Two minutes. One wake-up call.</p>
           </motion.div>
-        </section>
 
-        {/* Transformation Section */}
-        <section className="w-full max-w-5xl mx-auto mb-32 text-center">
-          <h2 className="text-3xl font-bold text-white mb-12">
-            The Before & After
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="relative group overflow-hidden rounded-2xl border border-red-500/20 bg-red-500/5 p-8 text-left">
-              <h3 className="text-xl font-bold text-red-400 mb-4">
-                Phase 1: Delusion
-              </h3>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-center gap-2">
-                  <span className="text-red-500">✗</span> 6+ hours screen time
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-red-500">✗</span> Relying on motivation,
-                  no systems
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-red-500">✗</span> Bleeding money on
-                  micro-transactions
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-red-500">✗</span> "I'll start on Monday"
-                  mindset
-                </li>
-              </ul>
-            </div>
-            <div className="relative group overflow-hidden rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-left">
-              <h3 className="text-xl font-bold text-emerald-400 mb-4">
-                Phase 2: Locked In
-              </h3>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-500">✓</span> Deep work blocks.
-                  Zero distractions.
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-500">✓</span> Lifting heavy 4x a
-                  week
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-500">✓</span> High-value
-                  networking & building assets
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-500">✓</span> Cold, objective
-                  self-awareness
-                </li>
-              </ul>
-            </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { step: "01", title: "Answer Honestly", desc: "Fill out a 5-section deep audit covering your physical state, habits, finances, social life, and goals. No faking allowed.", icon: "📝" },
+              { step: "02", title: "AI Analyzes You", desc: "Our AI processes your data through behavioral psychology frameworks and returns a comprehensive, brutally honest assessment.", icon: "🧠" },
+              { step: "03", title: "Get Your Protocol", desc: "Receive dimension scores, hidden psychological insights, prioritized fixes, and a custom 30-day action plan.", icon: "⚡" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="relative p-8 rounded-2xl bg-gray-900/30 border border-gray-800/50 backdrop-blur-sm group hover:border-emerald-500/30 transition-all duration-300"
+              >
+                <div className="absolute top-6 right-6 text-6xl font-black text-gray-900/80 select-none">{item.step}</div>
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </section>
 
-        {/* Features / Pillars */}
-        <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
-          {[
-            {
-              icon: <Target className="w-8 h-8 text-emerald-500" />,
-              title: "Objective Scoring",
-              desc: "Get rated /10 across 5 critical dimensions of your life based on cold, hard data.",
-            },
-            {
-              icon: <Brain className="w-8 h-8 text-emerald-500" />,
-              title: "Psychological Audit",
-              desc: "Our AI breaks down exactly what behavioral flaws are capping your potential.",
-            },
-            {
-              icon: <Zap className="w-8 h-8 text-emerald-500" />,
-              title: "30-Day Protocol",
-              desc: "A custom, step-by-step daily roadmap designed to fix your weakest links immediately.",
-            },
-          ].map((feature, i) => (
+        {/* Before & After */}
+        <section className="w-full max-w-5xl mx-auto mb-28">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              The Before & After
+            </h2>
+            <p className="text-gray-400 max-w-lg mx-auto">Which side are you on?</p>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-6">
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.2, duration: 0.5 }}
-              className="p-8 rounded-2xl bg-gray-900/50 border border-gray-800 backdrop-blur-sm hover:border-emerald-500/50 transition-colors"
+              className="relative group overflow-hidden rounded-2xl border border-red-500/20 bg-red-500/5 p-8 text-left hover:border-red-500/40 transition-colors"
             >
-              <div className="mb-4 bg-gray-950 w-16 h-16 rounded-xl flex items-center justify-center border border-gray-800">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                {feature.title}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 blur-3xl rounded-full" />
+              <h3 className="text-xl font-bold text-red-400 mb-6 flex items-center gap-2">
+                <ShieldAlert className="w-5 h-5" /> Phase 1: Delusion
               </h3>
-              <p className="text-gray-400 leading-relaxed">{feature.desc}</p>
+              <ul className="space-y-4 text-gray-400">
+                {[
+                  "6+ hours screen time daily",
+                  "Relying on motivation, no systems",
+                  "Bleeding money on micro-transactions",
+                  '"I\'ll start on Monday" mindset',
+                  "Comparing yourself to others constantly",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <span className="text-red-500 text-lg">✕</span> {item}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
-          ))}
-        </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative group overflow-hidden rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-left hover:border-emerald-500/40 transition-colors"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl rounded-full" />
+              <h3 className="text-xl font-bold text-emerald-400 mb-6 flex items-center gap-2">
+                <Flame className="w-5 h-5" /> Phase 2: Locked In
+              </h3>
+              <ul className="space-y-4 text-gray-400">
+                {[
+                  "Deep work blocks. Zero distractions.",
+                  "Lifting heavy 4x a week",
+                  "High-value networking & building assets",
+                  "Cold, objective self-awareness",
+                  "Every rupee tracked, every minute counted",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <span className="text-emerald-500 text-lg">✓</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Features Grid */}
+        <section className="w-full max-w-6xl mx-auto mb-28">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              What You Get
+            </h2>
+            <p className="text-gray-400 max-w-lg mx-auto">Every audit includes all of this. For free. Forever.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {features.map((feature, i) => {
+              const colors = colorMap[feature.color];
+              return (
+                <motion.div
+                  key={i}
+                  custom={i}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="p-7 rounded-2xl bg-gray-900/40 border border-gray-800/50 backdrop-blur-sm hover:border-gray-700/80 transition-all duration-300 group stat-card"
+                >
+                  <div className={`mb-5 w-12 h-12 rounded-xl flex items-center justify-center border ${colors}`}>
+                    <feature.icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{feature.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="w-full max-w-3xl mx-auto mb-24 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative p-12 rounded-3xl border border-emerald-500/20 bg-linear-to-b from-emerald-500/5 to-transparent overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-emerald-500/5 blur-3xl rounded-full" />
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+                Ready to face reality?
+              </h2>
+              <p className="text-gray-400 max-w-md mx-auto mb-8">
+                Most people avoid the truth. The ones who don&#39;t are the ones who actually change. Which one are you?
+              </p>
+              <Link href="/audit">
+                <Button variant="premium" size="lg" className="group text-base px-8">
+                  Take The Audit Now
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </section>
       </main>
 
-      <footer className="w-full py-8 border-t border-gray-900 text-center text-gray-500 text-sm">
+      <footer className="w-full py-8 border-t border-gray-900/50 text-center text-gray-600 text-sm relative z-10">
         <p>
-          © {new Date().getFullYear()} LifeMaxxer AI. All rights reserved. Do
-          the work.
+          © {new Date().getFullYear()} LifeMaxxer AI. All rights reserved. Do the work.
         </p>
       </footer>
     </div>

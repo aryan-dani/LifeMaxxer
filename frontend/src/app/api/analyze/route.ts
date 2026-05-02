@@ -20,12 +20,14 @@ export async function POST(req: Request) {
     });
 
     if (!backendResponse.ok) {
+      const errorText = await backendResponse.text();
+      console.error("Backend error response:", errorText);
       throw new Error(`Backend error: ${backendResponse.statusText}`);
     }
 
     const { reportData } = await backendResponse.json();
 
-    // 2. Save to Database
+    // 2. Save to Database (if Supabase is connected)
     let reportId = crypto.randomUUID();
 
     if (supabase) {
@@ -42,12 +44,19 @@ export async function POST(req: Request) {
 
       if (error) {
         console.error("Supabase Error:", error);
+        // Still continue — we'll use localStorage fallback
       } else if (data) {
         reportId = data.id;
       }
     }
 
-    return NextResponse.json({ reportId, success: true });
+    // 3. Return the report data along with the ID so the frontend can
+    //    store it in localStorage as a fallback when Supabase isn't configured
+    return NextResponse.json({
+      reportId,
+      reportData,
+      success: true,
+    });
   } catch (error: any) {
     console.error("Analyze Route Error:", error);
     return NextResponse.json(
